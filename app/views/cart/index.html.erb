@@ -1,0 +1,45 @@
+<h2>Your Cart</h2>
+
+
+<% if @cart.empty? %>
+    <h4>Your Cart is empty</h4>
+<% end %>
+
+<% total = 0 %>
+
+<table class ="cart">
+    <tr>
+        <td class="legend"></td>
+        <td class="legend"><h4>Title</h4></td>
+        <td class="legend"><h4>Price</h4></td>
+    </tr>
+    
+<% @cart.each do |id,quantity| %>
+<% app = App.find_by_id(id) %>
+
+    <tr>
+        <td>
+            <div class ="image"></div>
+            <%= link_to (image_tag app.image_url, :style => "height:100px"), app%>
+            
+        </td>
+        <td class="title"><%= link_to app.title, app %></td>
+        <td class="price"><%= number_to_currency(1 * app.price, :unit => "€") %></td>
+    </tr>
+    <%total  += app.price%>
+<%end%>
+
+<tr>
+    <td colspan ="2">
+        <div><h3>Total:</h3></div>
+    </td>
+    <td>
+        <div><h3><%= number_to_currency(total, :unit => "€") %></h3></div>
+    </td>
+</tr>
+    <tr>
+        <td class="legend"><%= link_to 'Continue Shopping', apps_path %></td>
+        <td class="legend"><a class="btn btn-warning btn-md" href="/cart/clear">Clear Cart</a></td>
+        <td class="legend"><a class="btn btn-success btn-lg" href="/purchase">Complete Purchase</a></td>
+    </tr>
+</table>

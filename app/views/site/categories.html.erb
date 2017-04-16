@@ -1,0 +1,39 @@
+<h2>Categories</h2>
+<h3>Games</h3>
+<div class="row catalog">
+
+<% @lifestyle.each do|app| %>
+  
+<div class="col-sm-3 col-md-2 col-xs-6">
+   <div style="margin:10px 0px;border-radius:10px;border:1px solid #aaa;background:#fff;box-shadow: 5px 5px 5px 0px #aaa;">
+      <div class ="image" style="text-align:center">
+        <%= link_to (image_tag app.image_url, :style =>"width:80%;border-radius:10px;margin:15px"), app %>
+      </div>
+
+      
+        <div class="title" style="text-align:center">
+          <h5><%= link_to app.title, app %></h5>
+        </div>
+        
+        <div class="price" style="text-align:center">
+          <h5>Downloads: <%= app.downloads%></h5>
+        </div>
+        
+        <div class="price" style="text-align:center">
+          <h5><%= number_to_currency(app.price, :unit =>"€") %></h5>
+        </div>
+        
+        <div class="links"  style="text-align:center">
+          <% if user_signed_in? %>
+             <a href="/cart/<%=app.id%>">Add to Cart</a>
+          <%else%>
+          <%end %>
+        </div>
+          
+          
+        </div>
+
+    </div>
+
+<%end%>
+</div>

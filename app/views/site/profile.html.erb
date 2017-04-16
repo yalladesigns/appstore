@@ -1,0 +1,72 @@
+<h2>Your Profile</h2>
+<p>Username:</p>
+<p>Date of Account:</p>
+
+<h2>Transactions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>App</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.User %></td>
+        <td><%= transaction.App %></td>
+        <td><%= link_to 'Show', transaction %></td>
+        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+<h3>Your Purchases</h3>
+
+<table class ="cart">
+    <tr>
+        <td class="legend"></td>
+        <td class="legend"><h4>Title</h4></td>
+        <td class="legend"><h4>Price</h4></td>
+    </tr>
+
+
+
+
+<!--
+
+
+
+    
+<% Transaction.each do |id| %>
+<% app = App.find_by_id(id) %>
+    <tr>
+        <td>
+            <div class ="image"></div>
+            <%= link_to (image_tag app.image_url, :style => "height:100px"), app%>
+            
+        </td>
+        <td class="title"><%= link_to app.title, app %></td>
+        <td class="price"><%= number_to_currency(1 * app.price, :unit => "€") %></td>
+        <td class="price"><button class="btn btn-primary btn-md" onclick="alertBox()">Download</b></td>
+    </tr>
+    <%total  += app.price%>
+<%end%>
+
+</table>
+
+
+<script>
+function alertBox() {
+    alert("Your download will begin shortly!");
+}
+</script>

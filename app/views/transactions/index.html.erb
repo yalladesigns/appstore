@@ -1,0 +1,49 @@
+<h3>Your Profile</h3>
+<h5>Username: <%=current_user.email %></h5>
+<h5>Member Since: <%=current_user.created_at %></h5>
+
+
+<h3>Your Purchases</h3>
+
+<table class ="cart">
+    <tr>
+        <td class="legend"><h4>Transaction ID</h4></td>
+        <td class="legend" colspan="2"><h4>Title</h4></td>
+        <td class="legend"><h4>Price</h4></td>
+        <td class="legend"><h4>Purchase Date</h4></td>
+        <td class="legend"><h4>Download App</h4></td>
+    </tr>
+    
+    
+    <% @transactions.each do |transaction| %>
+    <% applink = @apps.find_by_id(transaction.App_id) %>
+    <% @apprecord = @apps.find_by_id(transaction.App_id) %>
+   
+    <tr>
+        <td class="title"><%= transaction.id %></td>
+        <td>
+            <div class ="image"></div>
+            <%= link_to (image_tag @apprecord.image_url, :style => "height:100px"), applink %>
+            
+        </td>
+        <td class="title"><%= link_to @apprecord.title, applink %></td>
+        <td class="price"><%= number_to_currency(1 * @apprecord.price, :unit => "€") %></td>
+        <td class="price"><%= transaction.created_at %></td>
+        <td class="price"><button class="btn btn-primary btn-md" onclick="alertBox()">Download</b></td>
+    </tr>
+<%end%>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</table>
+<script>
+function alertBox() {
+    alert("Your download will begin shortly!");
+}
+</script>
