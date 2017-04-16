@@ -23,6 +23,7 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
+    
     if session[:cart] then
       @cart = session[:cart]
     else
